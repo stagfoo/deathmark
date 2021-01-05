@@ -3,7 +3,7 @@ import joro from 'joro';
 export const DS = {
   fontFamily: {
     default: "Fira Mono, san-serif",
-    alt: "'Staatliches', san-serif",
+    alt: "'Fira Mono', san-serif",
   },
   fontSizes: {
     sm: 8,
@@ -21,7 +21,9 @@ export const DS = {
   colors: {
     purple: "#8D58FD",
     blue: "#58D5FD",
-    green: "#83FD58",
+    green: "#3adcad",
+    black: "#0d1017",
+    red: "#ff4763"
   }
 }
 
@@ -30,12 +32,16 @@ export const STYLES = new joro();
 
 function buttonStyle(){
   return `
-  background: ${DS.colors.blue};
-  color:  ${DS.colors.purple};
+  width: 150px;
+  background: ${DS.colors.black};
+  color:  ${DS.colors.red};
+  text-transform: uppercase;
+  text-style: bold;
   box-sizing: border-box;
-  font-size: ${DS.fontSizes.lg}px;
+  text-shadow: 0px 1px ${DS.colors.red};
+  font-size: ${DS.fontSizes.md}px;
   padding: ${DS.gutters.md}px;
-  border: 0;
+  border: 1px solid ${DS.colors.red};
   text-decoration: none;
   `
 }
@@ -67,35 +73,37 @@ export function BaseStyles() {
     html,body {
       margin: 0;
       padding: 0;
-      background: ${DS.colors.purple};
-      color:  ${DS.colors.blue};
+      background: url('https://images6.alphacoders.com/107/thumb-1920-1072679.jpg');
+      color:  ${DS.colors.red};
       opacity: 1;
+    }
+    #app {
+      background-color: rgba(0,0,0,0.8);
     }
     textarea,
     button {
-      display: block;
-      clear:both;
-      margin: ${DS.gutters.sm}px auto ${DS.gutters.sm}px auto;
+      display: inline-block;
+      margin: ${DS.gutters.sm}px;
       ${buttonStyle()}
     }
-    textarea {
-      width: 100%;
-      min-height: 300px;
-      font-size: ${DS.fontSizes.xl}px;
+    button b {
+      text-shadow: 0px 1px ${DS.colors.green};
     }
-    .nav {
-      margin-top: ${DS.gutters.xl}px;
+    button small {
+      color:  ${DS.colors.green};
+      text-shadow: 0px 1px ${DS.colors.green};
     }
-    .nav li {
-      display:inline-block;
+    .button-bar {
+      width: 1080px;
+      margin: 0 auto;
     }
-    .nav li.active a {
-      background: ${DS.colors.green};
-      color:  ${DS.colors.purple};
+    video {
+      display:block;
+      margin: 0 auto;
     }
-    .nav li a {
-      ${buttonStyle()}
-      margin-right: ${DS.gutters.sm}px;
+    canvas {
+      position: absolute;
+      top: -100vh;
     }
     @keyframes notification {
       from {bottom: -120vh;}

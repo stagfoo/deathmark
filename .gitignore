@@ -5,3 +5,4 @@ dist/*.js
 dist/*.js.map
 chumbucket/*
 !chumbucket/readme.md
+media

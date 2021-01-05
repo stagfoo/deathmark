@@ -9,34 +9,13 @@ type Context = {
 
 // Handlers
 const HOME_PAGE = (ctx: Context, next: any) => {
-  state._update('updateNotification', {
-    text: "",
-    show: false
-  })
   state._update('updateCurrentPage', 'HOME')
 
 };
-const EXAMPLE_FETCH = (ctx: Context, next: any) => {
-  getData('chum').then(data => {
-    state._update('updateGreeting', data.greeting)
-    state._update('updateCurrentPage', 'EXAMPLE_FETCH')
-    state._update('updateNotification', {
-      text: "Shark data loaded  (´ε｀ )♡",
-      show: true
-    })
-    setTimeout(()=> {
-      state._update('updateNotification', {
-        text: "",
-        show: false
-      })
-    }, 1000)
-  })
-};
+
 
 // Routes
 page('/', HOME_PAGE);
-page('/example-fetch', EXAMPLE_FETCH);
-
 
 export function startRouters(): void {
   page.start();

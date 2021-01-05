@@ -3,6 +3,92 @@ import { reducer } from 'obake.js';
 export const defaultState = {
   greeting: '🍖🍖🍖🍖',
   currentPage: { name: 'HOME', activePage: "/" },
+  killMarkers: [
+    452,
+    490,
+    518,
+    559,
+    676,
+    679,
+    682,
+    705,
+    708,
+    711,
+     714,
+     717,
+     749,
+     762,
+     765,
+     779,
+     782,
+     853,
+     899,
+     955,
+     987,
+     1005,
+     1013,
+     1065,
+     1096,
+     1114,
+     1136,
+     1139,
+     1178,
+     1263,
+     1346,
+     1349,
+     1352,
+     1434,
+     1448,
+     1455,
+     1485,
+     1497,
+     1634,
+     1672,
+     1675,
+     1716,
+     1723,
+     1732,
+     1739,
+     1742,
+     1745,
+     1758,
+     1798,
+     1805,
+     1866,
+     1930,
+     1933,
+     1936,
+     1941,
+     1950,
+     1953,
+     1963,
+     1974,
+     2038,
+     2045,
+     2050,
+     2053,
+     2056,
+     2070,
+     2073,
+     2076,
+     2079,
+     2085,
+     2147,
+     2150,
+     2167,
+     2170,
+     2173,
+     2224,
+     2242,
+     2405,
+     2440,
+     2443,
+     2447,
+     2450,
+     2484,
+     2537,
+     2746,
+     2758, ],
   notification: {
     text: "",
     show: false
@@ -11,21 +97,16 @@ export const defaultState = {
 
  export const routes = {
     'Home': '/',
-    'Example Fetch': '/example-fetch',
  }
 
  export const activePage = {
    "HOME": "/",
-   "EXAMPLE_FETCH": "/example-fetch"
  }
 export const reducers = {
   updateCurrentPage: reducer((state, value: string) => {
     state.currentPage = { name: value, activePage:activePage[value]  };
   }),
-  updateGreeting: reducer((state, value: string) => {
-    state.greeting = value;
-  }),
-  updateNotification: reducer((state, value:{text: string, show: boolean}) => {
-    state.notification = value;
+  updateKillMarkers: reducer((state, value: string) => {
+    state.killMarkers = value;
   }),
 }
