@@ -93,19 +93,19 @@ const red = [183, 86, 93]
 const w1 = [208, 216, 208]
 const w2 = [188, 188, 180]
 window['k_x'] = 455
-window['k_y'] = 405
+window['k_y'] = 410
 
 const white_frames = {}
 const green_frames = {}
 const red_frames = {}
 function greenRange(g){
-  return g >= 225 && g <= 240
+  return g >= 225
 }
 function blueRange(n){
-  return n >= 225 && n <= 240
+  return n >= 225
 }
 function redRange(n){
-  return n >= 225 && n <= 240
+  return n >= 225
 }
 
 processor.computeFrame = function computeFrame() {
@@ -114,7 +114,7 @@ processor.computeFrame = function computeFrame() {
   const squareH = this.height/10
   const squareW = 200
   this.ctx1.drawImage(this.video, 0, 0, this.width, this.height);
-  let frame = this.ctx1.getImageData(killx, killy, 100, this.height/10);
+  let frame = this.ctx1.getImageData(killx, killy, 100, 100);
   let whiteAmount = []
   let greenAmount = []
   let redAmount = []
@@ -137,11 +137,12 @@ processor.computeFrame = function computeFrame() {
       redAmount.push({g,r,b})
     }
   }
-  //console.log('white pixels', whiteAmount.length, 'green pixels', greenAmount.length)
-  if(whiteAmount.length >= 50 && greenAmount.length >= 900){
+  //perfect percentage of white and green any more is false positive
+  if(whiteAmount.length >= 240 && whiteAmount.length < 300 && greenAmount.length >= 2200){
     const frameTime = (Math.round(this.video.currentTime))
     white_frames[frameTime] = whiteAmount
     green_frames[frameTime] = greenAmount
+    console.log(whiteAmount.length, greenAmount.length)
   }
 }
   this.ctx2.putImageData(frame, 0, 0);

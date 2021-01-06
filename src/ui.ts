@@ -28,13 +28,13 @@ export function routing(state) {
           crossorigin="anonymous"
         ></video>
         <canvas id="c1" width="1920" height="1080"></canvas>
-        <canvas id="c2" width="50" height="50"></canvas>
+        <canvas id="c2" width="50" height="15"></canvas>
         <div class="button-bar">
           <h1>#KillMarker</h1>
           ${state.killMarkers.map((v, i) => {
             return html`<button onclick="${() => scrubTo(v)}">
               <span><b>💀</b> #${i + 1}</span>
-          <small>[${v}]</small>
+              <small>[${v}]</small>
             </button>`;
           })}
         </div>

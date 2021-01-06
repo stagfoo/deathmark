@@ -102,8 +102,8 @@ export function BaseStyles() {
       margin: 0 auto;
     }
     canvas {
-      position: absolute;
-      top: -100vh;
+
+      filter: contrast(20) brightness(10);
     }
     @keyframes notification {
       from {bottom: -120vh;}
@@ -115,3 +115,6 @@ export function BaseStyles() {
     }
   `)
 }
+
+      /* position: absolute; */
+      /* top: -100vh; */
