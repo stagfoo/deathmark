@@ -1,31 +1,45 @@
 // Modules to control application life and create native browser window
-const { app, Menu, BrowserWindow, ipcMain } = require("electron");
-const path = require("path");
-const { dialog } = require("electron");
+const { app, Menu, BrowserWindow, ipcMain, dialog } = require("electron");
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
 
-const state = {
+
+const path = require("path");
+
+let state = {
+  projects: [],
   filename: ""
 }
 let mainWindow;
 
 
 
-function clickHandler(event, arg) {
+function clickHandler(event, arg, db) {
+  //Clear filename
+  console.log('state', state)
   switch (arg.action) {
     case 'open-file':
+      state.filename = ""
       dialog.showOpenDialog({ properties: ["openFile"] }).then(function (response) {
         if (!response.canceled) {
           state.filename = response.filePaths[0];
+          state.projects = [...state.projects, {
+              id: new Date().valueOf(),
+              createdAt: new Date().valueOf(),
+              filename: response.filePaths[0],
+              deathmarks: []
+          }]
           event.reply('@machine-state', state);
+          db.set('state', state).write()
         } else {
           console.log("no file selected");
+          state.filename = ""
         }
       });
       break;
     default:
       break;
   }
-  event.reply('@machine-state', state)
 }
 
 const dockMenu = Menu.buildFromTemplate([
@@ -76,12 +90,47 @@ function createWindow() {
 
 app.whenReady().then(() => {
   mainWindow = createWindow();
+  const userPath = app.getPath('userData');
+  const adapter = new FileSync(`${userPath}/db.json`)
+  const db = low(adapter)
+  db.defaults({state}).write()
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) mainWindow = createWindow();
   });
 
-  ipcMain.on('@click', clickHandler)
-  ipcMain.on('@get-machine-state', (e, a) => { e.reply('@machine-state', state) })
+  ipcMain.on('@click', (e,v) =>  { clickHandler(e,v,db) })
+  ipcMain.on('@load-saved-state', (e, a) => {
+    const v = db.get('state').value()
+    console.log('reanimatiing dead state', state)
+    state = v;
+    e.reply('@machine-state', v)
+  })
+  ipcMain.on('@get-machine-state', (e, a) => {
+      console.log('getting live state')
+      e.reply('@machine-state', state)
+  })
+  ipcMain.on('@save-state', (e, state) => {
+    const _state = JSON.parse(state);
+    console.log('@save-state', _state)
+    db.set('state', _state).write()
+  })
+  ipcMain.on('@save-project', (e, project) => {
+    state.filename = project.filename;
+    let found = -1;
+    state.projects.map((item, i) => {
+      if(project.filename === item.filename){
+        found = i;
+      }
+    })
+    if(found >= 0){
+      state.projects[found] = project;
+      db.set('state', state).write()
+      e.reply('@machine-state', state)
+    } else {
+      e.reply('@save-fail', project)
+    }
+  })
+
 
 
 });

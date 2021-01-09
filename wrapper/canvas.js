@@ -14,13 +14,16 @@ processor.doLoad = function doLoad() {
   this.c2 = document.getElementById('c2');
   this.ctx2 = this.c2.getContext('2d');
   this.video.playbackRate = 2.0;
+  this.video.muted = "muted"
   let self = this;
   this.video.addEventListener('play', function() {
       self.width = self.video.videoWidth / 2;
       self.height = self.video.videoHeight / 2;
       self.timerCallback();
+      state._update('updateScanStatus', true)
     }, false);
   this.video.addEventListener('pause', function() {
+    state._update('updateScanStatus', false)
     let lastValue = 0
     const arr = Object.keys(white_frames).map(k => {
       //wait 5 frames for the next frame
@@ -34,8 +37,8 @@ processor.doLoad = function doLoad() {
       console.log('nextDeathMarks', nextDeathMarks)
       console.log('white_frames', nextDeathMarks)
       state._update('updateDeathMarkers', nextDeathMarks)
+      saveProject()
   } else {
-    //TODO remove duplicates
     const next = [...state.deathmarks, ...nextDeathMarks]
     const nonDups = next.filter((v,i) => {
         if(next.indexOf(v) === i){
@@ -44,6 +47,7 @@ processor.doLoad = function doLoad() {
     })
     console.log(nonDups)
     state._update('updateDeathMarkers', nonDups)
+    saveProject()
   }
   white_frames = {}
   green_frames = {}
