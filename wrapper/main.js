@@ -12,12 +12,12 @@ let state = {
 }
 let mainWindow;
 
-function createNewProject(state){
-  state.filename = response.filePaths[0];
+function createNewProject(state, nextFilename){
+  state.filename = nextFilename
   state.projects = [...state.projects, {
       id: new Date().valueOf(),
       createdAt: new Date().valueOf(),
-      filename: response.filePaths[0],
+      filename: nextFilename,
       deathmarks: []
   }]
 }
@@ -35,7 +35,7 @@ function clickHandler(event, arg, db) {
           const nextFilename = response.filePaths[0];
           const result = projectExists(state, nextFilename);
           if(!result.status){
-            createNewProject()
+            createNewProject(state, nextFilename)
             event.reply('@machine-state', state);
             db.set('state', state).write()
           } else {
@@ -43,6 +43,7 @@ function clickHandler(event, arg, db) {
           }
         } else {
           console.log("no file selected");
+          event.reply('@failed-open', state);
           state.filename = ""
         }
       });
@@ -125,11 +126,11 @@ app.whenReady().then(() => {
     db.set('state', _state).write()
   })
   ipcMain.on('@save-project', (e, project) => {
-    state.filename = project.filename;
-    const result = projectExists(state,filename);
+    const result = projectExists(state, project.filename);
+    console.log('@save-project', result, state, project)
     if(result.status) {
       state.projects[result.index] = project;
-      state.filename = ""
+      state.filename = project.filename
       db.set('state', state).write()
       e.reply('@machine-state', state)
     } else {
@@ -141,7 +142,7 @@ app.whenReady().then(() => {
 function projectExists(state, filename) {
   let found = -1;
     state.projects.map((item, i) => {
-      if(project.filename === item.filename){
+      if(filename === item.filename){
         found = i;
       }
     })

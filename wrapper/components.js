@@ -126,19 +126,19 @@ function ProjectPage(state) {
           <button
             class="skull"
             onclick="${() => {
-              //add mark
+              manualDeathMark()
             }}"
           >
             💀
           </button>
-          <button
+          <!-- <button
             class="export"
             onclick="${() => {
               startProcessor();
             }}"
           >
             Export Deathmarks
-          </button>
+          </button> -->
         </div>
         <div class="debug">
           <!-- <div class="debug"> -->
@@ -152,6 +152,7 @@ function ProjectPage(state) {
             return html`<button class="mark" onclick="${() => scrubTo(v)}">
               <span><b>💀</b> #${i + 1}</span>
               <small>[${secondsToHms(v)}]</small>
+              <span onclick="${() => { deleteDeathMark(v)}}" class="delete">X</span>
             </button>`;
           })}
         </div>

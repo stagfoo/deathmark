@@ -15,7 +15,7 @@ video {
   border-radius: 14px;
   overflow: hidden;
   min-height: 720px;
-  min-width: 1080px;
+  /* min-width: 1080px; */
   background: #000;
 }
 body,html {
@@ -47,18 +47,23 @@ body {
 .item {
   box-sizing: content-box;
   flex: 0 0 auto;
-  margin-right: 1vw;
+  margin-right: 16px;
   position: relative;
 }
 .span-1 {
   /* Not really span 1 */
   width: 7.5vw;
+  min-width: 104px;
+
 }
 .span-5 {
-  width: 65.5vw;
+  width: 71.5vw;
+  min-width: 1080px;
+
 }
 .span-2 {
-  width: 24vw;
+  width: 18vw;
+  min-width: 280px;
 }
 
 .wrap {
@@ -119,7 +124,7 @@ body {
 }
 .game-select {
   background-color: #000;
-  height: 80vw;
+  height: 84vh;
   padding-top: 18px;
   padding-bottom: 18px;
   overflow: hidden;
@@ -163,6 +168,22 @@ h1 {
   border-radius: 30px;
   background: var(--yellow);
   overflow: hidden;
+  position: relative;
+}
+.deathmarks .mark span {
+  float:left;
+}
+.deathmarks .mark .delete {
+  position: absolute;
+  background: #000;
+  border-radius: 100%;
+  width: 24px;
+  color: var(--yellow);
+  right: 4px;
+  top: 4px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 8px;
 }
 
 .debug {

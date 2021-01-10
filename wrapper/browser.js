@@ -62,6 +62,15 @@ ipcRenderer.on("@machine-state", (event, arg) => {
   state._update("updateMachineState", arg);
   console.log("browser-state", state);
 });
+//Sync Data
+ipcRenderer.on("@save-fail", (event, arg) => {
+  console.log('@save-fail', arg)
+  alert('save failed')
+});
+ipcRenderer.on("@save-fail", (event, arg) => {
+  console.log('@save-fail', arg)
+  alert('open failed')
+});
 
 ipcRenderer.send("@load-saved-state");
 
