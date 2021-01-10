@@ -18,7 +18,6 @@ function onClickLoadProject(name) {
       found = i;
     }
   });
-  console.log("name", name, projects[found]);
   if (found >= 0) {
     const project = projects[found];
     state._update("updateDeathMarkers", project.deathmarks);
@@ -52,7 +51,6 @@ function saveProject() {
 }
 
 function onClickOpenProject(name) {
-  state._update();
 }
 
 function syncState() {

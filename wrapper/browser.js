@@ -9,7 +9,6 @@ const defaultMachineState = {
   projects: []
 }
 
-
 const defaultState = {
   currentPage: "home",
   isScanning: false,

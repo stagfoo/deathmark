@@ -12,6 +12,16 @@ let state = {
 }
 let mainWindow;
 
+function createNewProject(state){
+  state.filename = response.filePaths[0];
+  state.projects = [...state.projects, {
+      id: new Date().valueOf(),
+      createdAt: new Date().valueOf(),
+      filename: response.filePaths[0],
+      deathmarks: []
+  }]
+}
+
 
 
 function clickHandler(event, arg, db) {
@@ -22,15 +32,15 @@ function clickHandler(event, arg, db) {
       state.filename = ""
       dialog.showOpenDialog({ properties: ["openFile"] }).then(function (response) {
         if (!response.canceled) {
-          state.filename = response.filePaths[0];
-          state.projects = [...state.projects, {
-              id: new Date().valueOf(),
-              createdAt: new Date().valueOf(),
-              filename: response.filePaths[0],
-              deathmarks: []
-          }]
-          event.reply('@machine-state', state);
-          db.set('state', state).write()
+          const nextFilename = response.filePaths[0];
+          const result = projectExists(state, nextFilename);
+          if(!result.status){
+            createNewProject()
+            event.reply('@machine-state', state);
+            db.set('state', state).write()
+          } else {
+            event.reply('@machine-state', state);
+          }
         } else {
           console.log("no file selected");
           state.filename = ""
@@ -116,24 +126,37 @@ app.whenReady().then(() => {
   })
   ipcMain.on('@save-project', (e, project) => {
     state.filename = project.filename;
-    let found = -1;
-    state.projects.map((item, i) => {
-      if(project.filename === item.filename){
-        found = i;
-      }
-    })
-    if(found >= 0){
-      state.projects[found] = project;
+    const result = projectExists(state,filename);
+    if(result.status) {
+      state.projects[result.index] = project;
+      state.filename = ""
       db.set('state', state).write()
       e.reply('@machine-state', state)
     } else {
       e.reply('@save-fail', project)
     }
   })
-
-
-
 });
+
+function projectExists(state, filename) {
+  let found = -1;
+    state.projects.map((item, i) => {
+      if(project.filename === item.filename){
+        found = i;
+      }
+    })
+    if(found >= 0){
+     return {
+       index: found,
+       status: true
+     }
+    } else {
+      return {
+        index: -1,
+        status: false
+      }
+    }
+}
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
