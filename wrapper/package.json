@@ -16,6 +16,9 @@
     "mac": {
       "category": "Video",
       "icon": "favicons/icon.icns"
+    },
+    "win": {
+      "icon": "favicons/icon.ico"
     }
   },
   "repository": "https://github.com/electron/electron-quick-start",
