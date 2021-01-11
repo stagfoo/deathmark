@@ -161,7 +161,7 @@ function ProjectPage(state) {
         <div class="debug">
           <!-- <div class="debug"> -->
           <canvas id="c1" width="960" height="520"></canvas>
-          <canvas id="c2" width="50" height="15"></canvas>
+          <canvas id="c2" width="24" height="24"></canvas>
         </div>
       </div>
       <div class="item span-2">

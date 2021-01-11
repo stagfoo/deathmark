@@ -3,7 +3,9 @@ function onClickHome() {
   state._update("updateDeathMarkers", []);
   state._update("updateCurrentPage", "home");
 }
-
+function onClickDeleteProject(){
+  //TODO
+}
 function onClickCreateProject() {
   state._update("updateMachineState", {
     ...defaultMachineState,

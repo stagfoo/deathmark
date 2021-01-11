@@ -34,8 +34,6 @@ processor.doLoad = function doLoad() {
     })
   const nextDeathMarks = arr.filter(v => v);
   if(state.deathmarks.length === 0){
-      // console.log('nextDeathMarks', nextDeathMarks)
-      // console.log('white_frames', nextDeathMarks)
       state._update('updateDeathMarkers', nextDeathMarks)
       saveProject()
   } else {
@@ -87,20 +85,16 @@ processor.computeFrame = function computeFrame() {
   const killy = window['k_y']
   this.ctx1.drawImage(this.video, 0, 0, this.width, this.height);
   let frame = this.ctx1.getImageData(killx, killy, 100, 100);
-  //TODO test filter effects
-//   frame = imagedataFilters.contrast(frame, {amount: '10'})
-  // frame = imagedataFilters.brightness(frame, {amount: '10'})
   let whiteAmount = []
   let greenAmount = []
   let redAmount = []
-  let l = frame.data.length / 2;
+  let l = frame.data.length / 4;
   if (!this.video.paused) {
   for (let i = 0; i < l; i++) {
     //goes through every pixel in a frame for color
-    //must check 100*100 pixels
-    let r = frame.data[i * 2 + 0];
-    let g = frame.data[i * 2 + 1];
-    let b = frame.data[i * 2 + 2];
+    let r = frame.data[i * 4 + 0];
+    let g = frame.data[i * 4 + 1];
+    let b = frame.data[i * 4 + 2];
     // console.log(r,g,b)
     if(greenRange(g) && redRange(r) && blueRange(b)){
       whiteAmount.push({g,r,b})
@@ -113,15 +107,34 @@ processor.computeFrame = function computeFrame() {
     }
   }
   //perfect percentage of white and green any more is false positive
-//   console.log(whiteAmount.length, greenAmount.length)
-  if(whiteAmount.length >= 130 && whiteAmount.length < 300 && greenAmount.length >= 1500){
-    // console.log(whiteAmount.length, greenAmount.length)
-    const frameTime = (Math.round(this.video.currentTime))
+  const frameTime = (Math.round(this.video.currentTime))
+  const color = {
+    w: whiteAmount.length, 
+    g: greenAmount.length,
+    r: redAmount.length
+  }
+  console.log({
+    frameTime,
+    ...color
+  })
+  if(whiteThres(color.w) && greenThres(color.g) && redThres(color.r)){
     white_frames[frameTime] = whiteAmount
     green_frames[frameTime] = greenAmount
+    red_frames[frameTime] = redAmount
   }
 }
   this.ctx2.putImageData(frame, 0, 0);
   return;
 }
 window['processor'] = processor
+
+
+function whiteThres(n){
+  return n >= 23 && n <= 29
+}
+function greenThres(n){
+  return n >= 1000 &&  n <= 1100
+}
+function redThres(n){
+  return n >= 850
+}

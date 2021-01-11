@@ -188,16 +188,14 @@ h1 {
 }
 
 .debug {
-  display:none;
+  /* display:none; */
 }
-
-.top-button {}
-
 
 #c2 {
   position: absolute;
-  top: 0;
-  left: 80vw;
+  top: 50vh;
+  left: 54vh;
+  border: 2px solid var(--yellow)
 }
 .title-block {
   margin-top: 16px;
