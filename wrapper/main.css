@@ -133,7 +133,7 @@ body {
 }
 .game-select button {
   display:block;
-  margin: 0 auto;
+  margin: 0 auto 16px auto;
   padding: 0;
   background: none;
   width: 70px;

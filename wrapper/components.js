@@ -69,7 +69,10 @@ function GameSelect() {
     <div class="item span-1">
       <div class="game-select">
         <button>
-          <img width="70" src="../assets/valorant.webp" />
+          <img width="70" src="../assets/valorant.png" />
+        </button>
+        <button>
+          <img width="70" src="../assets/more.png" />
         </button>
       </div>
     </div>
