@@ -204,6 +204,7 @@ h1 {
   visibility: hidden;
 }
 #c2 {
+  visibility: hidden;
   position: absolute;
   transform: scale(3);
   top: 50vh;

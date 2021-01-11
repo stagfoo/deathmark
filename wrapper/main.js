@@ -54,8 +54,8 @@ function clickHandler(event, arg, db) {
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1080,
-    height: 720,
+    width: 1680,
+    height: 970,
     webPreferences: {
       webSecurity: false,
       icon: path.join(__dirname + 'favicons/icon.icns'),
