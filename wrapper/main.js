@@ -2,8 +2,6 @@
 const { app, Menu, BrowserWindow, ipcMain, dialog } = require("electron");
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
-
-
 const path = require("path");
 
 let state = {
@@ -53,27 +51,6 @@ function clickHandler(event, arg, db) {
   }
 }
 
-const dockMenu = Menu.buildFromTemplate([
-  {
-    label: 'New Window',
-    click () { console.log('New Window') }
-  }, {
-    label: 'New Window with Settings',
-    submenu: [
-      { label: 'Basic' },
-      { label: 'Pro' }
-    ]
-  },
-  { label: 'New Command...' }
-])
-
-app.whenReady().then(() => {
-  app.dock.setMenu(dockMenu)
-})
-
-
-
-
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -91,7 +68,6 @@ function createWindow() {
   mainWindow.loadFile("pages/index.html");
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
   return mainWindow
 }
 
@@ -163,8 +139,7 @@ function projectExists(state, filename) {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on("window-all-closed", function () {
-  // if (process.platform !== 'darwin') app.quit()
-  app.quit();
+  if (process.platform !== 'darwin') app.quit()
 });
 
 

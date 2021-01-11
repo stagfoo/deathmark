@@ -20,7 +20,7 @@ processor.doLoad = function doLoad() {
       self.width = self.video.videoWidth / 2;
       self.height = self.video.videoHeight / 2;
       self.timerCallback();
-      state._update('updateScanStatus', true)
+      state._update('updateScanStatus', true);
     }, false);
   this.video.addEventListener('pause', function() {
     state._update('updateScanStatus', false)
@@ -34,8 +34,8 @@ processor.doLoad = function doLoad() {
     })
   const nextDeathMarks = arr.filter(v => v);
   if(state.deathmarks.length === 0){
-      console.log('nextDeathMarks', nextDeathMarks)
-      console.log('white_frames', nextDeathMarks)
+      // console.log('nextDeathMarks', nextDeathMarks)
+      // console.log('white_frames', nextDeathMarks)
       state._update('updateDeathMarkers', nextDeathMarks)
       saveProject()
   } else {
@@ -45,7 +45,6 @@ processor.doLoad = function doLoad() {
             return v
         }
     })
-    console.log(nonDups)
     state._update('updateDeathMarkers', nonDups)
     saveProject()
   }
@@ -116,7 +115,7 @@ processor.computeFrame = function computeFrame() {
   //perfect percentage of white and green any more is false positive
 //   console.log(whiteAmount.length, greenAmount.length)
   if(whiteAmount.length >= 130 && whiteAmount.length < 300 && greenAmount.length >= 1500){
-    console.log(whiteAmount.length, greenAmount.length)
+    // console.log(whiteAmount.length, greenAmount.length)
     const frameTime = (Math.round(this.video.currentTime))
     white_frames[frameTime] = whiteAmount
     green_frames[frameTime] = greenAmount

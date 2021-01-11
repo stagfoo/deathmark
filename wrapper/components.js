@@ -35,9 +35,24 @@ function Video(filename) {
   `;
 }
 
-function ScanVideo() {
+function ScanVideo(isScanning) {
+  if(isScanning){
   return html`
     <button
+      id="stop-scan"
+      class="scan red"
+      onclick="${() => {
+        stopVideo();
+      }}"
+    >
+      Stop Scan
+    </button>
+  `;
+  }
+
+  return html`
+    <button
+      id="start-scan"
       class="scan"
       onclick="${() => {
         startProcessor();
@@ -122,7 +137,7 @@ function ProjectPage(state) {
       <div class="item single-project span-5">
         ${Video(state.machineState.filename)}
         <div class="button-bar">
-          ${ScanVideo()}
+          ${ScanVideo(state.isScanning)}
           <button
             class="skull"
             onclick="${() => {
@@ -149,7 +164,7 @@ function ProjectPage(state) {
       <div class="item span-2">
         <div class="deathmarks">
           ${state.deathmarks.map((v, i) => {
-            return html`<button class="mark" onclick="${() => scrubTo(v)}">
+            return html`<button id="mark-${v}" class="mark" onclick="${() => scrubTo(v)}">
               <span><b>💀</b> #${i + 1}</span>
               <small>[${secondsToHms(v)}]</small>
               <span onclick="${() => { deleteDeathMark(v)}}" class="delete">X</span>

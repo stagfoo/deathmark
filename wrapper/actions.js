@@ -96,6 +96,9 @@ function onClickOpenVideo() {
 function playVideo() {
   document.querySelector("video").play();
 }
+function stopVideo() {
+  document.querySelector("video").pause();
+}
 
 function getTitle(filename) {
   if (filename !== "" && filename !== undefined) {

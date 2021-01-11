@@ -6,3 +6,4 @@ dist/*.js.map
 chumbucket/*
 !chumbucket/readme.md
 media
+wrapper/dist

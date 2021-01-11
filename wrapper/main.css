@@ -1,5 +1,6 @@
 :root {
     --yellow: #F6E73B;
+    --red: #F63B3B;
     --grey: #343841;
     --heading-1: 28px;
   }
@@ -275,6 +276,11 @@ h1 {
 
 .button-bar .scan {
   background-color: var(--yellow);
+  color: #000;
+}
+
+.button-bar .scan.red {
+  background-color: var(--red);
   color: #000;
 }
 
