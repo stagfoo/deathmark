@@ -11,6 +11,7 @@ const defaultMachineState = {
 
 const defaultState = {
   currentPage: "home",
+  processorStart: false,
   isScanning: false,
   deathmarks: [],
   machineState: defaultMachineState,
@@ -38,6 +39,9 @@ const state = obake.createStore(
     }),
     updateScanStatus: obake.reducer((state, value) => {
       state.isScanning = value;
+    }),
+    processorStart: obake.reducer((state, value) => {
+      state.processorStart = value;
     }),
   }
 );
@@ -93,5 +97,8 @@ function scrubTo(v) {
 }
 
 function startProcessor(){
-  window["processor"].doLoad();
+  if(!state.processorStart) {
+    window["processor"].doLoad();
+    state._update('processorStart', true)
+  }
 }

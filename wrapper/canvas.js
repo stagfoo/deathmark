@@ -71,13 +71,13 @@ window['k_y'] = 415
 
 
 function greenRange(g){
-  return g >= 225
+  return g >= 220
 }
 function blueRange(n){
-  return n >= 225
+  return n >= 220
 }
 function redRange(n){
-  return n >= 225
+  return n >= 220
 }
 
 processor.computeFrame = function computeFrame() {
@@ -95,7 +95,6 @@ processor.computeFrame = function computeFrame() {
     let r = frame.data[i * 4 + 0];
     let g = frame.data[i * 4 + 1];
     let b = frame.data[i * 4 + 2];
-    // console.log(r,g,b)
     if(greenRange(g) && redRange(r) && blueRange(b)){
       whiteAmount.push({g,r,b})
     }
@@ -113,10 +112,7 @@ processor.computeFrame = function computeFrame() {
     g: greenAmount.length,
     r: redAmount.length
   }
-  console.log({
-    frameTime,
-    ...color
-  })
+  console.log({ frameTime, ...color })
   if(whiteThres(color.w) && greenThres(color.g) && redThres(color.r)){
     white_frames[frameTime] = whiteAmount
     green_frames[frameTime] = greenAmount
@@ -130,11 +126,11 @@ window['processor'] = processor
 
 
 function whiteThres(n){
-  return n >= 23 && n <= 29
+  return n >= 10 && n <= 30
 }
 function greenThres(n){
-  return n >= 1000 &&  n <= 1100
+  return n >= 700 &&  n <= 1500
 }
 function redThres(n){
-  return n >= 850
+  return n >= 520 &&  n <= 1000
 }

@@ -2,6 +2,7 @@ function onClickHome() {
   saveProject()
   state._update("updateDeathMarkers", []);
   state._update("updateCurrentPage", "home");
+  state._update('processorStart', false)
 }
 function onClickDeleteProject(){
   //TODO
