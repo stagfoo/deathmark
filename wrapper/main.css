@@ -79,11 +79,13 @@ body {
 }
 
 .card {
+  cursor: pointer;
   width: 280px;
   min-height: 148px;
   border-radius: 12px;
   margin: 14px;
   overflow: hidden;
+  position: relative;
 }
 .card .info-panel {
   background-color: #000;
@@ -127,6 +129,22 @@ body {
 .projects {
   max-width: 80vw;
 }
+
+.projects .card button {
+  font-weight: bold;
+  position: absolute;
+  background: var(--yellow);
+  border-radius: 100%;
+  width: 24px;
+  color: #000;
+  right: 4px;
+  top: 4px;
+  height: 24px;
+  line-height: 20px;
+  font-size: 10px;
+  overflow: hidden;
+}
+
 .single-project {
   height: 87vh
 }

@@ -24,7 +24,6 @@ function createNewProject(state, nextFilename){
 
 function clickHandler(event, arg, db) {
   //Clear filename
-  console.log('state', state)
   switch (arg.action) {
     case 'open-file':
       state.filename = ""
@@ -40,7 +39,7 @@ function clickHandler(event, arg, db) {
             event.reply('@machine-state', state);
           }
         } else {
-          console.log("no file selected");
+          // console.log("no file selected");
           event.reply('@failed-open', state);
           state.filename = ""
         }
@@ -88,22 +87,22 @@ app.whenReady().then(() => {
   ipcMain.on('@click', (e,v) =>  { clickHandler(e,v,db) })
   ipcMain.on('@load-saved-state', (e, a) => {
     const v = db.get('state').value()
-    console.log('reanimatiing dead state', state)
+    // console.log('reanimatiing dead state', state)
     state = v;
     e.reply('@machine-state', v)
   })
   ipcMain.on('@get-machine-state', (e, a) => {
-      console.log('getting live state')
+      // console.log('getting live state')
       e.reply('@machine-state', state)
   })
   ipcMain.on('@save-state', (e, state) => {
     const _state = JSON.parse(state);
-    console.log('@save-state', _state)
+    // console.log('@save-state', _state)
     db.set('state', _state).write()
   })
   ipcMain.on('@save-project', (e, project) => {
     const result = projectExists(state, project.filename);
-    console.log('@save-project', result, state, project)
+    // console.log('@save-project', result, state, project)
     if(result.status) {
       state.projects[result.index] = project;
       state.filename = project.filename
@@ -112,6 +111,13 @@ app.whenReady().then(() => {
     } else {
       e.reply('@save-fail', project)
     }
+  })
+  ipcMain.on('@delete-project', (e, project) => {
+    state.projects = state.projects.filter(np => {
+      return np.filename !== project.filename
+    })
+    db.set('state', state).write()
+    e.reply('@machine-state', state)
   })
 });
 

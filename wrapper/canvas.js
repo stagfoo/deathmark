@@ -108,11 +108,11 @@ processor.computeFrame = function computeFrame() {
   //perfect percentage of white and green any more is false positive
   const frameTime = (Math.round(this.video.currentTime))
   const color = {
-    w: whiteAmount.length, 
+    w: whiteAmount.length,
     g: greenAmount.length,
     r: redAmount.length
   }
-  console.log({ frameTime, ...color })
+  // console.log({ frameTime, ...color })
   if(whiteThres(color.w) && greenThres(color.g) && redThres(color.r)){
     white_frames[frameTime] = whiteAmount
     green_frames[frameTime] = greenAmount

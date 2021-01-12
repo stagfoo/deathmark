@@ -188,12 +188,15 @@ function HomePage(state) {
             Create Project ✨
           </div>
           ${state.machineState.projects.map((item) => {
-            return html`<div onclick="${() => onClickLoadProject(item.filename)}" class="item card">
+            return html`<div class="item card">
+              <div onclick="${() => onClickLoadProject(item.filename)}">
                   <video muted width="280" height="140" controls="false" src="${item.filename}"></video>
               <div class="info-panel">
                 <span>${getTitle(item.filename)}</span>
                 <small>${item.filename}</small>
               </div>
+              </div>
+              <button onclick="${() => { onClickDeleteProject(item) }}">X</button>
             </div>`;
           })}
         </div>

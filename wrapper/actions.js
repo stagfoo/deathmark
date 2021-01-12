@@ -4,9 +4,12 @@ function onClickHome() {
   state._update("updateCurrentPage", "home");
   state._update('processorStart', false)
 }
-function onClickDeleteProject(){
-  //TODO
+function onClickDeleteProject(item){
+  if(confirm("are you sure you want to delete this project?")){
+    ipcRenderer.send("@delete-project", item)
+  }
 }
+
 function onClickCreateProject() {
   state._update("updateMachineState", {
     ...defaultMachineState,
@@ -14,6 +17,7 @@ function onClickCreateProject() {
   });
   state._update("updateCurrentPage", "project");
 }
+
 function onClickLoadProject(name) {
   const projects = state.machineState.projects;
   const result = getProject(projects, name)
@@ -26,7 +30,6 @@ function onClickLoadProject(name) {
     });
     state._update("updateCurrentPage", "project");
   } else {
-    console.log('failed to load')
     alert('That file already in a project or failed to open')
   }
 }
@@ -57,18 +60,13 @@ function saveProject() {
   const name = state.machineState.filename;
   const result = getProject(projects, name)
   if(result.status){
-    console.log('@save-project', {
-      ...projects[result.found],
-      filename: name,
-      deathmarks: state.deathmarks,
-    })
     ipcRenderer.send("@save-project", {
       ...projects[result.found],
       filename: name,
       deathmarks: state.deathmarks,
     });
   } else {
-    console.log('found failed')
+    // console.log('found failed')
   }
 }
 
