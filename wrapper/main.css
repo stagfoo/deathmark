@@ -2,7 +2,7 @@
 ::-webkit-scrollbar-button       {  }
 ::-webkit-scrollbar-track        { /* 3 */ }
 ::-webkit-scrollbar-track-piece  { /* 4 */ }
-::-webkit-scrollbar-thumb        { margin: 4px; background:var(--yellow); border-radius: 30px;/* 5 */ }
+::-webkit-scrollbar-thumb        { margin: 4px; background:var(--grey); border-radius: 30px;/* 5 */ }
 ::-webkit-scrollbar-corner       { /* 6 */ }
 
 :root {
@@ -24,7 +24,7 @@ video {
   border-radius: 14px;
   overflow: hidden;
   min-height: 720px;
-  /* min-width: 1080px; */
+  margin-bottom:16px;
   background: #000;
 }
 body,html {
@@ -39,13 +39,16 @@ body {
     height: 100vh;
 }
 .container {
-  max-width: 100%;
+  width: 100vw;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: start;
   align-items: stretch;
   align-content: stretch
+}
+.item:last-child {
+  margin-right: 0px;
 }
 .container:after {
   display: block;
@@ -145,9 +148,7 @@ body {
   overflow: hidden;
 }
 
-.single-project {
-  height: 88vh
-}
+
 .game-select {
   background-color: #000;
   height: 84vh;
@@ -157,6 +158,7 @@ body {
   border-top-right-radius: 30px;
 }
 .game-select button {
+  opacity: 0.2;
   display:block;
   margin: 0 auto 16px auto;
   padding: 0;
@@ -278,21 +280,20 @@ h1 {
   font-size: 32px;
 }
 .button-bar {
-  position: absolute;
-  height: 100px;
-  bottom: 0px;
+  height:87px;
+  overflow: hidden;
 }
 
 .button-bar button {
-  padding: 32px;
+  padding: 0px 32px;
   overflow: hidden;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
   font-size: 24px;
   background-color: #000;
-  margin-right: 32px;
+  margin-right: 16px;
   color: var(--yellow);
-  height: 100px;
+  height: 87px;
   float:left;
 }
 
@@ -302,8 +303,8 @@ h1 {
   background-color: transparent;
   font-size: 42px;
   padding: 0px;
-  width: 85px;
-  height: 85px;
+  width: 75px;
+  height: 75px;
   border-radius: 100%;
   line-height: normal;
 }
@@ -333,4 +334,8 @@ h1 {
 
 .top-button.projects {
   right: 220px;
+}
+
+.game-select .active { 
+  opacity: 1;
 }
