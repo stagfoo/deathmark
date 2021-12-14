@@ -63,6 +63,7 @@ function saveProject() {
     ipcRenderer.send("@save-project", {
       ...projects[result.found],
       filename: name,
+      game: state.currentGame,
       deathmarks: state.deathmarks,
     });
   } else {
@@ -99,6 +100,11 @@ function playVideo() {
 }
 function stopVideo() {
   document.querySelector("video").pause();
+}
+
+function setCurrentGame(value){
+  state._update("updateCurrentGame", value)
+  syncState();
 }
 
 function getTitle(filename) {

@@ -68,20 +68,32 @@ function GameSelect() {
   return html`
     <div class="item span-1">
       <div class="game-select">
-        <button>
+        <button class="valorant" onclick="${() => {
+          setCurrentGame("valorant")
+        }}">
           <img width="70" src="../assets/valorant.png" />
         </button>
-        <button>
+        <button class="outward" onclick="${() => {
+          setCurrentGame("outward")
+        }}">
+          <img width="70" src="../assets/outward.png" />
+        </button>
+        <button disabled>
           <img width="70" src="../assets/more.png" />
         </button>
       </div>
+      <style>
+          .${state.currentGame} {
+            border: 4px solid yellow !important;
+          }
+      </style>
     </div>
   `;
 }
 function TitleBlock(filename) {
   if (state.currentPage === "home") {
     return html`<div class="title-block">
-      <h1>Your Project</h1>
+      <h1>Your ${state.currentGame} Project</h1>
     </div>`;
   }
   if (filename === "") {

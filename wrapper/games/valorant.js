@@ -1,3 +1,4 @@
+function valorantProcessor() {
 let white_frames = {}
 let green_frames = {}
 let red_frames = {}
@@ -122,7 +123,6 @@ processor.computeFrame = function computeFrame() {
   this.ctx2.putImageData(frame, 0, 0);
   return;
 }
-window['processor'] = processor
 
 
 function whiteThres(n){
@@ -134,3 +134,7 @@ function greenThres(n){
 function redThres(n){
   return n >= 520 &&  n <= 1000
 }
+return processor
+}
+
+window["processors"]['valorant'] = valorantProcessor;

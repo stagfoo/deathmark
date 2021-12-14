@@ -11,6 +11,7 @@ const defaultMachineState = {
 
 const defaultState = {
   currentPage: "home",
+  currentGame: "valorant",
   processorStart: false,
   isScanning: false,
   deathmarks: [],
@@ -28,6 +29,9 @@ const state = obake.createStore(
   defaultState,
   { renderer },
   {
+    updateCurrentGame: obake.reducer((state, value) => {
+      state.currentGame = value;
+    }),
     updateCurrentPage: obake.reducer((state, value) => {
       state.currentPage = value;
     }),
@@ -98,7 +102,7 @@ function scrubTo(v) {
 
 function startProcessor(){
   if(!state.processorStart) {
-    window["processor"].doLoad();
+    window["processors"][state.currentGame].doLoad();
     state._update('processorStart', true)
   }
 }
