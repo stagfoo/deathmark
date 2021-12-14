@@ -119,9 +119,8 @@ body {
 
 .logo {
   height: 100px;
-  margin: 0 auto;
-  padding: 16px;
-  display:block;
+  margin: 27px auto 0;
+  display: block;
 }
 .logo-click {
   width: 100%;
