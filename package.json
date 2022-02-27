@@ -13,8 +13,8 @@
   "author": "stagfoo",
   "license": "ISC",
   "pre-commit": [
-    "lint:fix",
-    "spellcheck"
+    "spellcheck",
+    "lint:fix"
   ],
   "dependencies": {
     "nanomorph": "^5.4.3",
