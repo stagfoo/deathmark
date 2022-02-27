@@ -1,0 +1,24 @@
+{
+    "version": "0.1",
+    "language": "en-GB",
+    "words": [
+        "stagfoo",
+        "nanomorph",
+        "morphdom",
+        "nanohtml",
+        "nanohtml",
+        "crossorigin",
+        "valorant",
+        "Deathmark",
+        "deathmarks",
+        "obake",
+        "joro",
+        "workbox",
+        "Fira",
+        "Staatliches"
+    ],
+    "ignorePaths": [
+        "**/node_modules/**"
+    ],
+    "dictionaries": ["css"]
+}
