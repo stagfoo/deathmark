@@ -41,7 +41,7 @@ export function video(filename: string) {
   `;
 }
 
-export function scanVideo(state: State, isScanning: boolean) {
+export function scanVideo(isScanning: boolean) {
   if (isScanning) {
     return html`
       <button
@@ -76,13 +76,17 @@ export function gameSelect(state: State) {
       <div class="game-select">
         <button
           class="${state?.currentGame === 'valorant' ? 'active' : ''}"
-          onclick="${() => { ACTIONS.setCurrentGame('valorant') }}"
+          onclick="${() => {
+    ACTIONS.setCurrentGame('valorant');
+  }}"
         >
           <img width="70" src="assets/valorant.png" />
         </button>
         <button
           class="${state?.currentGame === 'outward' ? 'active' : ''}"
-          onclick="${() => { ACTIONS.setCurrentGame('outward') }}"
+          onclick="${() => {
+    ACTIONS.setCurrentGame('outward');
+  }}"
         >
           <img width="70" src="assets/outward.png" />
         </button>
@@ -161,7 +165,7 @@ export function projectPage(state: State) {
       <div class="item single-project span-5">
         ${video(state?.currentProject?.filename)}
         <div class="button-bar">
-          ${scanVideo(state, state?.isScanning)}
+          ${scanVideo(state?.isScanning)}
           <button
             class="skull"
             onclick="${() => {
@@ -170,14 +174,6 @@ export function projectPage(state: State) {
           >
             💀
           </button>
-          <!-- <button
-            class="export"
-            onclick="${() => {
-    ACTIONS.startProcessor();
-  }}"
-          >
-            Export Deathmarks
-          </button> -->
         </div>
         <div class="debug">
           <!-- <div class="debug"> -->
