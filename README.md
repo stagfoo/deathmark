@@ -8,8 +8,4 @@
 - https://dev.to/basal/deathmark-programmatically-scan-videos-for-points-of-interest-11l1
 
 # Video show case
-https://www.youtube.com/watch?v=Ce1b5pBaWwc
-
-
-
-[![VIDEO](https://img.youtube.com/vi/Ce1b5pBaWwc/0.jpg)]([https://www.youtube.com/watch?v=Ce1b5pBaWwc](https://www.youtube.com/watch?v=Ce1b5pBaWwc))
+[![VIDEO](https://img.youtube.com/vi/Ce1b5pBaWwc/0.jpg)](https://www.youtube.com/watch?v=Ce1b5pBaWwc)
